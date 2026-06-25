@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>南宫体育 · 运动场景与知识</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #1e2025;
+      background-color: #f8f7f4;
+    }
+    /* 深色头图 hero */
+    .hero {
+      background: #0a0e17;
+      background-image: radial-gradient(ellipse at 30% 50%, #1a2538 0%, #0a0e17 90%);
+      color: #e6e9f0;
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #c0a060, #e3c878, #c0a060);
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #f0e8d8, #d4b87a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 740px;
+      margin: 0 auto;
+      color: #bdc3d0;
+      font-weight: 350;
+      line-height: 1.6;
+    }
+    .hero .sub {
+      margin-top: 1.4rem;
+      font-size: 1rem;
+      color: #8d98b0;
+      border-bottom: 1px solid rgba(192, 160, 96, 0.4);
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    /* 通用容器 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    /* 浅色区 */
+    section {
+      padding: 3.5rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 450;
+      margin-bottom: 2rem;
+      color: #1e2025;
+      border-left: 6px solid #c0a060;
+      padding-left: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .section-title small {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #6f727b;
+      margin-left: 0.8rem;
+    }
+    /* 优势区 — 卡片 */
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .advantage-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 1.6rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #edebe8;
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .advantage-card:hover {
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
+    }
+    .advantage-card h3 {
+      font-size: 1.35rem;
+      font-weight: 450;
+      margin-bottom: 0.8rem;
+      color: #1e2025;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .advantage-card h3 span {
+      background: #c0a060;
+      color: #0a0e17;
+      font-size: 1rem;
+      padding: 0.1rem 0.7rem;
+      border-radius: 24px;
+      font-weight: 500;
+    }
+    .advantage-card p {
+      color: #3c3f48;
+      font-size: 0.95rem;
+    }
+    /* 说明区 (知识型段落) */
+    .explain-block {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2.6rem 2.8rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #eae7e2;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .explain-block p {
+      margin-bottom: 1.2rem;
+      font-size: 1.02rem;
+      color: #252830;
+    }
+    .explain-block p:last-child {
+      margin-bottom: 0;
+    }
+    .explain-block a {
+      color: #a6843e;
+      text-decoration: none;
+      font-weight: 470;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .explain-block a:hover {
+      border-bottom-color: #a6843e;
+    }
+    .highlight {
+      background: #f1ede6;
+      padding: 0.1rem 0.4rem;
+      border-radius: 6px;
+      font-style: normal;
+    }
+    /* FAQ 摘要 */
+    .faq-summary {
+      background: transparent;
+      border-top: 1px solid #ddd9d2;
+      margin-top: 0.8rem;
+      padding-top: 2.2rem;
+    }
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e6e1da;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 500;
+      color: #1e2025;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+    }
+    .faq-a {
+      color: #4a4d57;
+      font-size: 0.95rem;
+      padding-left: 0.2rem;
+    }
+    .faq-a a {
+      color: #a6843e;
+      text-decoration: none;
+      border-bottom: 1px dotted #cbb88a;
+    }
+    .faq-a a:hover {
+      border-bottom-style: solid;
+    }
+    /* 底部链接区 */
+    .footer-links {
+      background: #0a0e17;
+      color: #a8b0c2;
+      padding: 2.8rem 2rem;
+      text-align: center;
+      border-top: 2px solid #c0a060;
+    }
+    .footer-links .inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .footer-links a {
+      color: #d4c8a8;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212, 200, 168, 0.3);
+      transition: color 0.2s, border-color 0.2s;
+      padding-bottom: 0.1rem;
+    }
+    .footer-links a:hover {
+      color: #f0e6c8;
+      border-bottom-color: #f0e6c8;
+    }
+    .footer-links .tagline {
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: #6a738b;
+      margin-top: 0.2rem;
+    }
+    .footer-links .legal {
+      font-size: 0.8rem;
+      color: #505a72;
+      margin-top: 0.5rem;
+    }
+    /* 响应式 */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.6rem; }
+      .explain-block { padding: 1.8rem 1.5rem; }
+      .advantages-grid { gap: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 4rem 1.2rem 3.2rem; }
+      .container { padding: 0 1.2rem; }
+      .advantage-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero 区 -->
+  <header class="hero">
+    <h1>南宫体育</h1>
+    <p>运动场景的深度观察与知识梳理 —— 从场地运营、赛事组织到日常训练，探讨体育空间的多元可能。</p>
+    <div class="sub">运动 · 场地 · 赛事 · 体验</div>
+  </header>
+
+  <!-- 优势区：运动场景要素 -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">场景优势 <small>运动空间的四个维度</small></h2>
+      <div class="advantages-grid">
+        <div class="advantage-card">
+          <h3>⛹️ 场地适配 <span>01</span></h3>
+          <p>从标准竞技场馆到社区运动角，<strong>南宫体育</strong>关注不同规模场地的功能分区与动线设计，让空间利用率更合理。</p>
+        </div>
+        <div class="advantage-card">
+          <h3>🏅 赛事组织 <span>02</span></h3>
+          <p>赛事流程、裁判配置、应急预案…… 专业赛事的背后是细致的方案推演，我们持续沉淀相关经验与原则。</p>
+        </div>
+        <div class="advantage-card">
+          <h3>🧘 训练体系 <span>03</span></h3>
+          <p>无论是集体训练还是个人提升，周期化安排与恢复策略同样重要，运动知识本身也是体育的一部分。</p>
+        </div>
+        <div class="advantage-card">
+          <h3>📊 数据辅助 <span>04</span></h3>
+          <p>运动表现追踪、场地使用统计、安全监测…… 数据工具正在成为现代体育场馆的隐形基础设施。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 说明区：知识型论述段落 -->
+  <section style="padding-top: 0.5rem;">
+    <div class="container">
+      <h2 class="section-title">从场地到氛围 <small>体育空间的内在逻辑</small></h2>
+      <div class="explain-block">
+        <p>
+          一个体育空间的诞生，远不止于铺设地面与安装器材。动线如何影响训练节奏？观众席与热身区的距离怎样才算合理？灯光色温对球类项目的视觉判断有无影响？这些问题在专业场馆的规划阶段就会被反复讨论。<a href="https://cns-nangongsport.com">南宫体育</a>长期关注此类议题，并通过案例与资料梳理，为从业者和爱好者提供相对系统的参考。
+        </p>
+        <p>
+          以篮球场为例，场地边线至障碍物的安全距离、地板弹性系数与运动员关节负荷的关系、甚至观众席噪音对罚球命中率的潜在影响，都属于体育科学中值得观察的细节。运动不仅是体能的较量，也是环境、规则与认知共同作用的结果。
+        </p>
+        <p>
+          <span class="highlight">赛事组织</span>方面，从秩序册编排到医疗点分布，每个环节都建立在对运动项目特性的理解之上。马拉松的补给站间距、羽毛球赛的空调风向控制、游泳馆的水质监测频率——这些具体场景中的知识，往往比抽象理论更具指导意义。
+        </p>
+        <p>
+          对运动爱好者而言，了解这些背景有助于更理性地选择训练场地、评估赛事质量；对场馆运营方来说，系统性的知识梳理也是优化服务、提升体验的基础。我们相信，体育的深度藏在每一个经过思考的细节里。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 摘要 -->
+  <section style="padding-top: 0.2rem;">
+    <div class="container">
+      <h2 class="section-title">常见问题摘要 <small>运动场景中的实用问答</small></h2>
+      <div class="faq-summary">
+        <div class="faq-item">
+          <span class="faq-q">● 怎样判断一个运动场地的专业性？</span>
+          <div class="faq-a">可参考场地尺寸是否吻合对应项目标准（如篮球场 28m×15m）、地面材质是否通过相关认证（如 FIBA 认证）、照明是否均匀且避免眩光。更多细节可了解 <a href="https://cns-nangongsport.com">南宫体育</a> 整理的场地评估要点。</div>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">● 业余赛事组织最容易被忽略的环节是什么？</span>
+          <div class="faq-a">医疗保障与突发天气预案。很多业余赛事只关注赛程和裁判，却忽略了医疗点位置、急救通道、以及雨天/高温的应对方案，而这些恰恰是安全办赛的底线。</div>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">● 运动训练中，恢复手段和训练本身哪个更重要？</span>
+          <div class="faq-a">二者并非对立关系。有效恢复（睡眠、营养、主动放松）是训练收益最大化的前提。忽视恢复可能导致疲劳累积与受伤风险上升，训练计划也难以持续执行。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 底部链接区 -->
+  <footer class="footer-links">
+    <div class="inner">
+      <p style="font-size: 1rem; color: #d4c8a8; margin-bottom: 0.2rem;">
+        <a href="https://cns-nangongsport.com">南宫体育</a> · 运动知识·场地观察·赛事参考
+      </p>
+      <p class="tagline">基于真实场景的内容梳理，不以流量为导向</p>
+      <p class="legal">© 2025 · 信息仅供参考 · 具体运动请遵循专业指导</p>
+    </div>
+  </footer>
+
+</body>
+</html>
